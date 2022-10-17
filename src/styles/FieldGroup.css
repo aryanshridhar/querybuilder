@@ -1,4 +1,6 @@
 .field-group {
+    /* Maintain the 10:1 ratio */
+    flex: 10;
     margin-top: 5%;
     margin-left: 2em;
     margin-right: 2em;

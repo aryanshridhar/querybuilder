@@ -19,3 +19,9 @@
 .active {
     background-color: #5C61F0;
 }
+
+.info-btn{
+    margin-left: 4px;
+    margin-top: 8px;
+    opacity: 0.9;
+}

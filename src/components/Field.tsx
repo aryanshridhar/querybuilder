@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FieldDropdownBar from './FieldDropdownBar';
 import { RootState } from '../redux/store';
 import { change } from '../redux/slices/query';
+import logo from '../assets/icon.png';
 import { useEffect } from 'react';
 
 type FieldProps = {
@@ -62,6 +63,9 @@ function Field(props: FieldProps): JSX.Element {
         >
           OR
         </button>
+        <div>
+          <img className='info-btn' height={15} width={15} src={logo}></img>
+        </div>
       </div>
     );
   };
@@ -77,6 +81,7 @@ function Field(props: FieldProps): JSX.Element {
               itemIndex={index}
               dropdownItems={value}
               key={index}
+              isRemovable={index !== 0}
             />
           );
         })}

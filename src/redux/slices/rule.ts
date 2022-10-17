@@ -52,8 +52,14 @@ const fieldStore = createSlice({
           return state;
       }
     },
+    deleteRule: (state, action: PayloadAction<{ index: [number, number] }>) => {
+      const [parentIndex, itemIndex] = action.payload.index;
+      state[parentIndex].children.splice(itemIndex, 1);
+      return state;
+    },
   },
 });
 
-export const { toggleConjunction, updateDropdownValue, addRuleGroup, addRule } = fieldStore.actions;
+export const { deleteRule, toggleConjunction, updateDropdownValue, addRuleGroup, addRule } =
+  fieldStore.actions;
 export default fieldStore.reducer;

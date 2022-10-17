@@ -12,3 +12,7 @@
 .hidden-btn {
     display: none;
 }
+
+.query-field-width {
+    width: 95%;
+}
