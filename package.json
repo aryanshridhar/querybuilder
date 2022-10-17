@@ -2,7 +2,7 @@
   "name": "querybuilder",
   "homepage": "https://aryanshridhar.github.io/querybuilder",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.14.1",
