@@ -1,0 +1,21 @@
+.field-dropdown {
+    flex: 1;
+}
+
+.field-box {
+    border-color: rgba(64, 67, 72, 1);
+    background-color: #282B30;
+}
+
+.conjunction-btn {
+    border: 0.125rem solid rgba(64, 67, 72, 1);
+    font-size: 12px;
+}
+
+.btn-l {
+    border-right: 0px;
+}
+
+.active {
+    background-color: #5C61F0;
+}
