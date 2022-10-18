@@ -20,8 +20,8 @@ const initialState: FieldGroup = [
   },
 ];
 
-const fieldStore = createSlice({
-  name: 'query',
+const ruleStore = createSlice({
+  name: 'rule',
   initialState,
   reducers: {
     toggleConjunction: (state, action: PayloadAction<ConjunctionParams>) => {
@@ -66,5 +66,5 @@ const fieldStore = createSlice({
 });
 
 export const { deleteRule, toggleConjunction, updateDropdownValue, addRuleGroup, addRule } =
-  fieldStore.actions;
-export default fieldStore.reducer;
+  ruleStore.actions;
+export default ruleStore.reducer;

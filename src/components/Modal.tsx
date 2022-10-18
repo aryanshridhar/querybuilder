@@ -7,12 +7,15 @@ import { useSelector } from 'react-redux';
 
 function Modal() {
   const query = useSelector((state: RootState) => state.query);
+  const rule = useSelector((state: RootState) => state.rule);
+
   const handleFinishClick = () => {
-    alert(`Readable ouput - ${query}`);
+    alert(`Readable ouput - ${query}\nand check console for the object!`);
+    console.log(rule);
   };
 
   return (
-    <div className='modal relative flex flex-col'>
+    <div className='modal relative flex flex-col h-[75vh] w-[54rem]'>
       <QueryModal />
       <FieldGroup />
 

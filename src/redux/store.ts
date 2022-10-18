@@ -5,7 +5,7 @@ import queryReducer from './slices/query';
 const store = configureStore({
   reducer: {
     query: queryReducer,
-    field: fieldReducer,
+    rule: fieldReducer,
   },
 });
 

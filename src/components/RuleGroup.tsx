@@ -18,7 +18,7 @@ interface FieldProps {
 function RuleGroup(props: FieldProps): JSX.Element {
   const { fieldItems, itemIndex } = props;
 
-  const state = useSelector((state: RootState) => state.field);
+  const state = useSelector((state: RootState) => state.rule);
   const { conjunction } = state[itemIndex];
   const dispatch = useDispatch();
   const handleClick = () => {

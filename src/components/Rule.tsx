@@ -22,7 +22,7 @@ interface FieldDropdownBarProps {
 function Rule(props: FieldDropdownBarProps) {
   const { parentFieldIndex, itemIndex, dropdownItems, isRemovable } = props;
 
-  const state = useSelector((state: RootState) => state.field);
+  const state = useSelector((state: RootState) => state.rule);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import RuleGroup from './RuleGroup';
 import { addRuleGroup } from '../redux/slices/rule';
 
 function FieldGroup() {
-  const ruleGroup = useSelector((state: RootState) => state.field);
+  const ruleGroup = useSelector((state: RootState) => state.rule);
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(addRuleGroup());
