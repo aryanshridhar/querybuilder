@@ -1,21 +1,21 @@
-import '../styles/Field.css';
+import '../styles/RuleGroup.css';
 
-import { Conjunction, RuleGroup } from '../types/rule';
+import { Conjunction, RuleGroup as RuleGroupType } from '../types/rule';
 import { addRule, toggleConjunction } from '../redux/slices/rule';
 import { useDispatch, useSelector } from 'react-redux';
 
-import FieldDropdownBar from './FieldDropdownBar';
+import FieldDropdownBar from './Rule';
 import { RootState } from '../redux/store';
 import { change } from '../redux/slices/query';
-import logo from '../assets/icon.png';
+import logo from '../assets/info-icon.png';
 import { useEffect } from 'react';
 
-type FieldProps = {
-  fieldItems: RuleGroup;
+interface FieldProps {
+  fieldItems: RuleGroupType;
   itemIndex: number;
-};
+}
 
-function Field(props: FieldProps): JSX.Element {
+function RuleGroup(props: FieldProps): JSX.Element {
   const { fieldItems, itemIndex } = props;
 
   const state = useSelector((state: RootState) => state.field);
@@ -50,7 +50,7 @@ function Field(props: FieldProps): JSX.Element {
     return (
       <div className='inline-flex pl-4 pt-3'>
         <button
-          className={`conjunction-btn btn-l rounded-l-sm py-1 px-2 border cursor-pointer text-sm ${activeButtonStyle(
+          className={`conjunction-btn text-xs btn-l rounded-l-sm py-1 px-2 border cursor-pointer ${activeButtonStyle(
             'AND'
           )}`}
           onClick={() => handleConjunctionClick('AND')}
@@ -59,12 +59,12 @@ function Field(props: FieldProps): JSX.Element {
         </button>
         <button
           onClick={() => handleConjunctionClick('OR')}
-          className={`conjunction-btn text-sm py-1 px-2 rounded-r ${activeButtonStyle('OR')}`}
+          className={`conjunction-btn text-xs py-1 px-2 rounded-r ${activeButtonStyle('OR')}`}
         >
           OR
         </button>
         <div>
-          <img className='info-btn' height={15} width={15} src={logo}></img>
+          <img className='ml-1 mt-2 opacity-90' height={15} width={15} src={logo}></img>
         </div>
       </div>
     );
@@ -88,7 +88,7 @@ function Field(props: FieldProps): JSX.Element {
         <div className='p-4'>
           <button
             onClick={handleClick}
-            className='footer-button footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium'
+            className='text-xs footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium'
           >
             + Add filter
           </button>
@@ -98,4 +98,4 @@ function Field(props: FieldProps): JSX.Element {
   );
 }
 
-export default Field;
+export default RuleGroup;

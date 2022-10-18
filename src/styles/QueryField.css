@@ -1,18 +1,4 @@
-.query-field{
-    margin-top: 4px;
-    padding: 8px;
+.query-field {
     background-color: #4338CA;
-    font-size: 12px;
-    border-radius: 3px;
-}
-
-.more-btn {
-    font-size: 15px;
-}
-.hidden-btn {
-    display: none;
-}
-
-.query-field-width {
     width: 95%;
 }

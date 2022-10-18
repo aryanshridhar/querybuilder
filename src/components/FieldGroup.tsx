@@ -1,9 +1,7 @@
-import '../styles/FieldGroup.css';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import Field from './Field';
 import { RootState } from '../redux/store';
+import RuleGroup from './RuleGroup';
 import { addRuleGroup } from '../redux/slices/rule';
 
 function FieldGroup() {
@@ -12,18 +10,19 @@ function FieldGroup() {
   const handleClick = () => {
     dispatch(addRuleGroup());
   };
+
   return (
-    <div className='field-group flex flex-col'>
+    <div style={{ flex: 10 }} className='field-group flex flex-col overflow-y-auto mx-8 mt-12'>
       <div className='field'>
         {/* TODO(aryanshridhar): Not render with index as key */}
         {ruleGroup.map((val, index) => {
-          return <Field itemIndex={index} fieldItems={val} key={index} />;
+          return <RuleGroup itemIndex={index} fieldItems={val} key={index} />;
         })}
       </div>
       <div className='mt-5'>
         <button
           onClick={handleClick}
-          className='footer-button footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium'
+          className='footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium text-xs'
         >
           + Add new group filter
         </button>

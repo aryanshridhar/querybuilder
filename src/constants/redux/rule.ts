@@ -1,4 +1,4 @@
-import { Rule, RuleGroup } from '../types/rule';
+import { Rule, RuleGroup } from '../../types/rule';
 
 const initialRule: Rule = {
   type: 'rule',

@@ -39,23 +39,22 @@
     opacity: 0.8;
 }
 
-.dropdown-label{
+.dropdown-label {
     font-size: 11px;
     margin-bottom: 2px;
 }
 
-.dropdown-row-1{
+.dropdown-row-1 {
+    /* Maintain a 12:1 ratio */
     flex:12
 }
 
-.delete-div {
+.delete-img-div {
+    /* TODO: Fix tiny CSS */
     margin-left: -8px;
-    align-self: flex-end;
-    flex: 1;
 }
 
 .delete-img {
-    cursor: pointer;
     border: 0.125rem solid rgba(64, 67, 72, 1);
     padding: 3px;
     background-color: #3D4045;

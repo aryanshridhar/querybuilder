@@ -20,24 +20,23 @@ class QueryBuilder implements RootQueryBuilder {
     let queryString = '';
     item.forEach((ruleGroup: RuleGroup) => {
       ruleGroup.children.forEach((rule: Rule, index) => {
-        if (index != 0) {
-          if (queryString !== '') {
-            queryString += ` ${ConjunctionEnum[ruleGroup.conjunction]} `;
-          }
-        }
         if (this.isValidRule(rule)) {
           const validRule = rule as Required<DropDownValues>;
           queryString += `"(field.${validRule.field}) ${ConditionEnum[validRule.condition]} \\"${
             rule.criteria || ''
           }"\\"`;
         }
+        // Future check to decide if an conjunction should be added or not
+        if (index !== ruleGroup.children.length - 1) {
+          if (this.isValidRule(ruleGroup.children[index + 1]) && queryString !== '') {
+            queryString += ` ${ConjunctionEnum[ruleGroup.conjunction]} `;
+          }
+        }
       });
+
+      // TODO: Discuss alternatives!
       queryString += ' ';
     });
-
-    if (queryString.slice(-4) == '&&  ' || queryString.slice(-4) == '||  ') {
-      queryString = queryString.slice(0, -4);
-    }
 
     return queryString;
   }

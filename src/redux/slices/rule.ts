@@ -1,7 +1,12 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { FieldGroup } from '../../types/rule';
-import { DropDownParams, ConjunctionParams } from '../../types/redux/rule';
-import { initialRule, initialRuleGroup } from '../../constants/field';
+import {
+  DropDownParams,
+  ConjunctionParams,
+  AddRuleParams,
+  DeleteRuleParams,
+} from '../../types/redux/rule';
+import { initialRule, initialRuleGroup } from '../../constants/redux/rule';
 
 const initialState: FieldGroup = [
   {
@@ -28,7 +33,7 @@ const fieldStore = createSlice({
       state.push(initialRuleGroup);
       return state;
     },
-    addRule: (state, action: PayloadAction<{ index: number }>) => {
+    addRule: (state, action: PayloadAction<AddRuleParams>) => {
       const index = action.payload.index;
       state[index].children.push(initialRule);
       return state;
@@ -52,7 +57,7 @@ const fieldStore = createSlice({
           return state;
       }
     },
-    deleteRule: (state, action: PayloadAction<{ index: [number, number] }>) => {
+    deleteRule: (state, action: PayloadAction<DeleteRuleParams>) => {
       const [parentIndex, itemIndex] = action.payload.index;
       state[parentIndex].children.splice(itemIndex, 1);
       return state;

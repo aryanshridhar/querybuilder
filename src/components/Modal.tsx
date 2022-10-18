@@ -10,21 +10,22 @@ function Modal() {
   const handleFinishClick = () => {
     alert(`Readable ouput - ${query}`);
   };
+
   return (
-    <div className='modal flex flex-col'>
+    <div className='modal relative flex flex-col'>
       <QueryModal />
       <FieldGroup />
 
-      <div className='footer items-end flex justify-between'>
+      <div className='px-4 py-4 flex-1 items-end flex justify-between'>
         <div>
-          <button className='footer-button footer-button-back hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium text-sm bg-grey-100'>
+          <button className='footer-button-back hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium text-xs bg-grey-100'>
             Back
           </button>
         </div>
         <div>
           <button
             onClick={handleFinishClick}
-            className='footer-button footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium text-sm'
+            className='footer-button-finish hover:bg-indigo-500 py-2 px-4 text-white rounded-md font-medium text-xs'
           >
             Finish
           </button>

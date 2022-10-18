@@ -12,3 +12,11 @@ export interface ConjunctionParams {
   index: number;
   conjunction: Conjunction;
 }
+
+export interface AddRuleParams {
+  index: number;
+}
+
+export interface DeleteRuleParams {
+  index: [number, number];
+}

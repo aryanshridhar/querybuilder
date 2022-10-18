@@ -1,17 +1,7 @@
 .modal {
-    position: relative;
     background-color: #1D2025;
     height: 75vh;
     width: 54rem;
-}
-
-.footer {
-    flex: 1;
-    padding: 1rem 1em 1em 1em;
-}
-
-.footer-button{
-    font-size: 12px;
 }
 
 .footer-button-finish {

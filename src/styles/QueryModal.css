@@ -1,11 +1,4 @@
 .query-modal {
     background-color: #5C61F0;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
     padding: 1.4em 1.5em 1.2em 1.8em;
-}
-
-.querytext{
-    font-size: 17px;
-    font-weight: 400;
 }
