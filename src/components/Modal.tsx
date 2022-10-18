@@ -10,7 +10,7 @@ function Modal() {
   const rule = useSelector((state: RootState) => state.rule);
 
   const handleFinishClick = () => {
-    alert(`Readable ouput - ${query}\nand check console for the object!`);
+    alert(`Readable ouput - ${query}\n\nand check console for the Rule object!`);
     console.log(rule);
   };
 
