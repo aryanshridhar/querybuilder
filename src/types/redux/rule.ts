@@ -1,22 +1,22 @@
 import { Conjunction, Rule } from '../rule';
 
-export type DropDownValues = Omit<Rule, 'type'>;
+export type DropDownValues = Omit<Rule, 'type' | 'id'>;
 
 export interface DropDownParams {
   type: string;
-  index: [number, number];
+  id: [string, string];
   data: DropDownValues;
 }
 
 export interface ConjunctionParams {
-  index: number;
+  id: string;
   conjunction: Conjunction;
 }
 
 export interface AddRuleParams {
-  index: number;
+  id: string;
 }
 
 export interface DeleteRuleParams {
-  index: [number, number];
+  id: [string, string];
 }

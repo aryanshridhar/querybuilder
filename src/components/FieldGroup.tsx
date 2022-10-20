@@ -14,9 +14,8 @@ function FieldGroup() {
   return (
     <div style={{ flex: 10 }} className='field-group flex flex-col overflow-y-auto mx-8 mt-12'>
       <div className='field'>
-        {/* TODO(aryanshridhar): Not render with index as key */}
-        {ruleGroup.map((val, index) => {
-          return <RuleGroup itemIndex={index} fieldItems={val} key={index} />;
+        {ruleGroup.map((val) => {
+          return <RuleGroup ruleGroup={val} key={val.id} />;
         })}
       </div>
       <div className='mt-5'>

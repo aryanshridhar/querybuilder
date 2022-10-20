@@ -4,25 +4,24 @@ import { Conjunction, RuleGroup as RuleGroupType } from '../types/rule';
 import { addRule, toggleConjunction } from '../redux/slices/rule';
 import { useDispatch, useSelector } from 'react-redux';
 
-import FieldDropdownBar from './Rule';
 import { RootState } from '../redux/store';
+import Rule from './Rule';
 import { change } from '../redux/slices/query';
 import logo from '../assets/info-icon.png';
 import { useEffect } from 'react';
 
 interface FieldProps {
-  fieldItems: RuleGroupType;
-  itemIndex: number;
+  ruleGroup: RuleGroupType;
 }
 
-function RuleGroup(props: FieldProps): JSX.Element {
-  const { fieldItems, itemIndex } = props;
-
+function RuleGroup(props: FieldProps): JSX.Element | null {
+  const { ruleGroup } = props;
+  const { id: ruleGroupId } = ruleGroup;
+  const { conjunction } = ruleGroup;
   const state = useSelector((state: RootState) => state.rule);
-  const { conjunction } = state[itemIndex];
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(addRule({ index: itemIndex }));
+    dispatch(addRule({ id: ruleGroupId }));
   };
   const activeButtonStyle = (condition: Conjunction) => {
     if (condition === conjunction) {
@@ -32,7 +31,7 @@ function RuleGroup(props: FieldProps): JSX.Element {
   const handleConjunctionClick = (conjunction: Conjunction) => {
     dispatch(
       toggleConjunction({
-        index: itemIndex,
+        id: ruleGroupId,
         conjunction,
       })
     );
@@ -40,10 +39,10 @@ function RuleGroup(props: FieldProps): JSX.Element {
 
   useEffect(() => {
     dispatch(change(state));
-  }, [state[itemIndex].conjunction]);
+  }, [ruleGroup.conjunction]);
 
   const renderConjunctionButton = (): JSX.Element | null => {
-    if (fieldItems.children.length < 2) {
+    if (ruleGroup.children.length < 2) {
       return null;
     }
 
@@ -74,15 +73,9 @@ function RuleGroup(props: FieldProps): JSX.Element {
     <div className='field-box border mb-5'>
       <div className='flex flex-col'>
         {renderConjunctionButton()}
-        {fieldItems.children.map((value, index) => {
+        {ruleGroup.children.map((value, index) => {
           return (
-            <FieldDropdownBar
-              parentFieldIndex={itemIndex}
-              itemIndex={index}
-              dropdownItems={value}
-              key={index}
-              isRemovable={index !== 0}
-            />
+            <Rule ruleGroup={ruleGroup} rule={value} key={value.id} isRemovable={index !== 0} />
           );
         })}
         <div className='p-4'>

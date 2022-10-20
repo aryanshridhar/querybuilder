@@ -36,6 +36,7 @@ export type Criteria = 'Offers' | 'Performance' | 'Platform' | 'Product Feedback
 export type Conjunction = 'AND' | 'OR';
 
 export interface Rule {
+  readonly id: string;
   field?: Field;
   condition?: Condition;
   criteria?: Criteria;
@@ -43,6 +44,7 @@ export interface Rule {
 }
 
 export interface RuleGroup {
+  readonly id: string;
   children: Rule[];
   conjunction: Conjunction;
   type: 'rule_group';

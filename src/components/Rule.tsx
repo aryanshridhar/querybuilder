@@ -2,43 +2,38 @@ import 'react-dropdown/style.css';
 import '../styles/Rule.css';
 
 import Dropdown, { Option } from 'react-dropdown';
+import { RuleGroup, Rule as RuleType } from '../types/rule';
 import { conditionItems, criteriaItems, fieldItems } from '../constants/components/rule';
 import { deleteRule, updateDropdownValue } from '../redux/slices/rule';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { DropDownValues } from '../types/redux/rule';
 import { RootState } from '../redux/store';
 import { change } from '../redux/slices/query';
 import deleteIcon from '../assets/delete-icon.png';
 import { useEffect } from 'react';
 
-interface FieldDropdownBarProps {
-  parentFieldIndex: number;
-  itemIndex: number;
-  dropdownItems: DropDownValues;
+interface RuleProps {
+  ruleGroup: RuleGroup;
+  rule: RuleType;
   isRemovable: boolean;
 }
 
-function Rule(props: FieldDropdownBarProps) {
-  const { parentFieldIndex, itemIndex, dropdownItems, isRemovable } = props;
+function Rule(props: RuleProps) {
+  const { rule, ruleGroup, isRemovable } = props;
+  const { id: ruleGroupId } = ruleGroup;
 
   const state = useSelector((state: RootState) => state.rule);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(change(state));
-  }, [
-    state[parentFieldIndex].children[itemIndex].condition,
-    state[parentFieldIndex].children[itemIndex].criteria,
-    state[parentFieldIndex].children[itemIndex].field,
-    state[parentFieldIndex].children.length,
-  ]);
+  }, [rule.condition, rule.criteria, rule.field, ruleGroup.children.length]);
 
   const event = (type: string, val: Option) => {
     dispatch(
       updateDropdownValue({
         type,
-        index: [parentFieldIndex, itemIndex],
+        id: [ruleGroupId, rule.id],
         data: { [type]: val.value },
       })
     );
@@ -56,7 +51,7 @@ function Rule(props: FieldDropdownBarProps) {
   const handleDeleteRule = () => {
     dispatch(
       deleteRule({
-        index: [parentFieldIndex, itemIndex],
+        id: [ruleGroupId, rule.id],
       })
     );
   };
@@ -81,7 +76,7 @@ function Rule(props: FieldDropdownBarProps) {
           <label className='dropdown-label'>Field</label>
           <Dropdown
             className='dropdown-field'
-            value={dropdownItems.field}
+            value={rule.field}
             options={fieldItems}
             onChange={onChangeField}
             placeholder='Select field'
@@ -91,7 +86,7 @@ function Rule(props: FieldDropdownBarProps) {
           <label className='dropdown-label'>Condition</label>
           <Dropdown
             className='dropdown-field'
-            value={dropdownItems.condition}
+            value={rule.condition}
             options={conditionItems}
             onChange={onChangeCondition}
             placeholder='Select condition'
@@ -101,7 +96,7 @@ function Rule(props: FieldDropdownBarProps) {
           <label className='dropdown-label'>Criteria</label>
           <Dropdown
             className='dropdown-field'
-            value={dropdownItems.criteria}
+            value={rule.criteria}
             options={criteriaItems}
             onChange={onChangeCriteria}
             placeholder='Select criteria'

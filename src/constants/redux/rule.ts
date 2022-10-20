@@ -1,15 +1,10 @@
 import { Rule, RuleGroup } from '../../types/rule';
 
-const initialRule: Rule = {
+const initialRule: Omit<Rule, 'id'> = {
   type: 'rule',
 };
 
-const initialRuleGroup: RuleGroup = {
-  children: [
-    {
-      type: 'rule',
-    },
-  ],
+const initialRuleGroup: Omit<RuleGroup, 'id' | 'children'> = {
   conjunction: 'AND',
   type: 'rule_group',
 };

@@ -1,17 +1,21 @@
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { FieldGroup } from '../../types/rule';
 import {
-  DropDownParams,
-  ConjunctionParams,
   AddRuleParams,
+  ConjunctionParams,
   DeleteRuleParams,
+  DropDownParams,
 } from '../../types/redux/rule';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { initialRule, initialRuleGroup } from '../../constants/redux/rule';
+
+import { FieldGroup } from '../../types/rule';
+import { nanoid } from 'nanoid';
 
 const initialState: FieldGroup = [
   {
+    id: nanoid(),
     children: [
       {
+        id: nanoid(),
         type: 'rule',
       },
     ],
@@ -25,41 +29,58 @@ const ruleStore = createSlice({
   initialState,
   reducers: {
     toggleConjunction: (state, action: PayloadAction<ConjunctionParams>) => {
-      const { index, conjunction } = action.payload;
-      state[index] = { ...state[index], conjunction: conjunction };
+      const { id, conjunction } = action.payload;
+      const ruleGroupId = state.findIndex((rule) => rule.id === id);
+      state[ruleGroupId].conjunction = conjunction;
+
       return state;
     },
+
     addRuleGroup: (state) => {
-      state.push(initialRuleGroup);
+      state.push({
+        ...initialRuleGroup,
+        id: nanoid(),
+        children: [{ ...initialRule, id: nanoid() }],
+      });
       return state;
     },
+
     addRule: (state, action: PayloadAction<AddRuleParams>) => {
-      const index = action.payload.index;
-      state[index].children.push(initialRule);
+      const id = action.payload.id;
+      const index = state.findIndex((rule) => rule.id === id);
+      state[index].children.push({ ...initialRule, id: nanoid() });
+
       return state;
     },
+
     updateDropdownValue: (state, action: PayloadAction<DropDownParams>) => {
       const data = action.payload.data;
-      const [parentIndex, itemIndex] = action.payload.index;
+      const [ruleGroupId, ruleId] = action.payload.id;
+      const ruleGroupIdindex = state.findIndex((rule) => rule.id === ruleGroupId);
+      const ruleIdIndex = state[ruleGroupIdindex].children.findIndex((rule) => rule.id === ruleId);
 
       switch (action.payload.type) {
         case 'field':
-          state[parentIndex].children[itemIndex].field = data.field;
+          state[ruleGroupIdindex].children[ruleIdIndex].field = data.field;
           return state;
         case 'condition':
-          state[parentIndex].children[itemIndex].condition = data.condition;
+          state[ruleGroupIdindex].children[ruleIdIndex].condition = data.condition;
           return state;
         case 'criteria':
-          state[parentIndex].children[itemIndex].criteria = data.criteria;
+          state[ruleGroupIdindex].children[ruleIdIndex].criteria = data.criteria;
           return state;
 
         default:
           return state;
       }
     },
+
     deleteRule: (state, action: PayloadAction<DeleteRuleParams>) => {
-      const [parentIndex, itemIndex] = action.payload.index;
-      state[parentIndex].children.splice(itemIndex, 1);
+      const [ruleGroupId, ruleId] = action.payload.id;
+      const ruleGroupIdindex = state.findIndex((rule) => rule.id === ruleGroupId);
+      const ruleIdIndex = state[ruleGroupIdindex].children.findIndex((rule) => rule.id === ruleId);
+
+      state[ruleGroupIdindex].children.splice(ruleIdIndex, 1);
       return state;
     },
   },
