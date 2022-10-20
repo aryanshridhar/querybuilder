@@ -41,15 +41,15 @@ const timePeriodItems: string[] = ['1 day', '10 days', '21 days', '1 month'];
 const customeridItems: string[] = ['CustomerID#1', 'CustomerID#2', 'CustomerID#3', 'CustomerID#4'];
 
 const mappedObject: Record<string, string[]> = {
-  'theme': criteriaItems,
-  'subtheme': subThemeItems,
-  'reason': reasonItems,
-  'language': languageItems,
-  'source': sourceItems,
-  'rating': ratingItems,
-  'timeperiod': timePeriodItems,
-  'customerid': customeridItems,
-}
+  theme: criteriaItems,
+  subtheme: subThemeItems,
+  reason: reasonItems,
+  language: languageItems,
+  source: sourceItems,
+  rating: ratingItems,
+  timeperiod: timePeriodItems,
+  customerid: customeridItems,
+};
 
 const mappedFieldToCriteria = new Map<string, string[]>(Object.entries(mappedObject));
 

@@ -58,12 +58,10 @@ function Rule(props: RuleProps) {
     );
   };
   const criteriaItems = useMemo(() => {
-    console.log(selectedField);
     const item = mappedFieldToCriteria.get(selectedField);
-    console.log(item);
     return item || [];
-  },[selectedField])
-  
+  }, [selectedField]);
+
   const renderDeleteIcon = (): JSX.Element | null => {
     if (isRemovable) {
       return (
@@ -106,7 +104,7 @@ function Rule(props: RuleProps) {
           <Dropdown
             className='dropdown-field'
             value={selectedField !== '' ? rule.criteria : ''}
-            options={selectedField !== '' ? criteriaItems: []}
+            options={selectedField !== '' ? criteriaItems : []}
             onChange={onChangeCriteria}
             placeholder='Select criteria'
           />
