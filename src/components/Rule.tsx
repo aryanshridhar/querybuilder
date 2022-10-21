@@ -3,14 +3,14 @@ import '../styles/Rule.css';
 
 import Dropdown, { Option } from 'react-dropdown';
 import { RuleGroup, Rule as RuleType } from '../types/rule';
-import { conditionItems, criteriaItems, fieldItems } from '../constants/components/rule';
+import { conditionItems, fieldItems, mappedFieldToCriteria } from '../constants/components/rule';
 import { deleteRule, updateDropdownValue } from '../redux/slices/rule';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../redux/store';
 import { change } from '../redux/slices/query';
 import deleteIcon from '../assets/delete-icon.png';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface RuleProps {
   ruleGroup: RuleGroup;
@@ -23,6 +23,7 @@ function Rule(props: RuleProps) {
   const { id: ruleGroupId } = ruleGroup;
 
   const state = useSelector((state: RootState) => state.rule);
+  const [selectedField, setSelectedField] = useState<string>('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function Rule(props: RuleProps) {
   };
 
   const onChangeField = (val: Option) => {
+    setSelectedField(() => val.value);
     return event('field', val);
   };
   const onChangeCondition = (val: Option) => {
@@ -55,6 +57,13 @@ function Rule(props: RuleProps) {
       })
     );
   };
+  const criteriaItems = useMemo(() => {
+    console.log(selectedField);
+    const item = mappedFieldToCriteria.get(selectedField);
+    console.log(item);
+    return item || [];
+  },[selectedField])
+  
   const renderDeleteIcon = (): JSX.Element | null => {
     if (isRemovable) {
       return (
@@ -96,8 +105,8 @@ function Rule(props: RuleProps) {
           <label className='dropdown-label'>Criteria</label>
           <Dropdown
             className='dropdown-field'
-            value={rule.criteria}
-            options={criteriaItems}
+            value={selectedField !== '' ? rule.criteria : ''}
+            options={selectedField !== '' ? criteriaItems: []}
             onChange={onChangeCriteria}
             placeholder='Select criteria'
           />
